@@ -5,6 +5,7 @@ export default function Home() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
+        {/* Logo */}
         <Image
           className={styles.logo}
           src="/next.svg"
@@ -14,6 +15,15 @@ export default function Home() {
           priority
         />
         <div className={styles.intro}>
+          <div className="hero">
+           <Image
+              src="/hero.jpg"
+              alt="handcrafted soap hero image"
+              width={1600}
+              height={600}
+            />
+          </div>
+          
           <h1>To get started, edit the page.tsx file.</h1>
           <p>
             Looking for a starting point or more instructions? Head over to{" "}
