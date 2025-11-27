@@ -1,5 +1,13 @@
 export type User = {
     id: string;
+    name: string;
+    email: string;
+    password: string;
+};
+
+export type UserType = {
+    id: number;
+    type: 'seller' | 'buyer';
     display_name: string;
     email: string;
     password: string;
