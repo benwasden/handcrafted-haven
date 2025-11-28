@@ -9,15 +9,15 @@
   --button-secondary-hover: #f2f2f2;
   --button-secondary-border: #ebebeb;
 
-  display: flex;
+  /* display: flex;
   min-height: 100vh;
   align-items: center;
-  justify-content: center;
-  font-family: var(--font-geist-sans);
-  background-color: var(--background);
+  justify-content: center; */
+  /*font-family: var(--font-geist-sans);  /*font */
+  /*background-color: var(--background); /*background */
 }
 
-.main {
+/* .main {
   display: flex;
   min-height: 100vh;
   width: 100%;
@@ -27,24 +27,18 @@
   justify-content: space-between;
   background-color: var(--foreground);
   padding: 120px 60px;
-}
+} */
 
-.intro {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
-  gap: 24px;
-}
 
 .intro h1 {
-  max-width: 320px;
+  max-width: 600px;
   font-size: 40px;
   font-weight: 600;
   line-height: 48px;
   letter-spacing: -2.4px;
   text-wrap: balance;
   color: var(--text-primary);
+  margin-left: 50px;
 }
 
 .intro p {
