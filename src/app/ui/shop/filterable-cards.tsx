@@ -159,7 +159,7 @@ export default function FilterableCards({
                                 checked={seller.includes(s.id)}
                                 onChange={() => toggleSeller(s.id)}
                             />
-                            <span>{s.display_name}</span>
+                            <span>{s.friendly_name}</span>
                         </label>
                     ))}
                 </div>
