@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Funnel_Display, Montserrat } from "next/font/google";
 import "./ui/globals.css";
 import SideNav from "./ui/header/sidenav";
 
@@ -11,12 +11,12 @@ export const metadata: Metadata = {
   description: 'The virtual marketplace for talented creators and customers.',
 };
 
-const geistSans = Geist({
+const funDisplay = Funnel_Display({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
+const montserrat = Montserrat({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
@@ -28,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body className={`${funDisplay.variable} ${montserrat.variable}`}>
         <SideNav />
         {children}
       </body>
