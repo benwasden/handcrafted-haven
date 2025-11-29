@@ -157,6 +157,18 @@ a {
   font-size: 0.9rem;
   color: #6b7280;
 }
+table {
+  border: solid 1px black;
+}
+th {
+  background-color: none;
+}
+tr:nth-child(odd) {
+  background-color: #f2f2f2;
+}
+tr:hover {
+  background-color: #ddd;
+}
 
 /* @media (prefers-color-scheme: dark) {
   html {

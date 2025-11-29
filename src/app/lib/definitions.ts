@@ -3,6 +3,7 @@ export type User = {
     display_name: string;
     email: string;
     password: string;
+    friendly_name: string;
 };
 
 export type UserType = {

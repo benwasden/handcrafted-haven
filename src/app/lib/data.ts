@@ -95,8 +95,31 @@ export async function fetchSellers(): Promise<User[]> {
     const data = await sql<User[]>`
       SELECT
         id,
-        display_name AS "display_name"
+        display_name AS "display_name",
+        friendly_name
       FROM users
+      ORDER BY display_name
+        `;
+    // console.log('Sellers data fetched:', data);
+    return data;
+  } catch (error) {
+    // console.error('Error fetching sellers data:', error);
+    throw new Error('Failed to fetch sellers data');
+  }
+}
+
+export async function fetchSellersInfo(): Promise<User[]> {
+  try {
+    // console.log(`Fetching sellers data...`);
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+    const data = await sql<User[]>`
+      SELECT
+        id,
+        display_name AS "display_name",
+        email,
+        friendly_name
+      FROM users
+      WHERE usertype_id = 1
       ORDER BY display_name
         `;
     // console.log('Sellers data fetched:', data);
