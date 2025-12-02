@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { lusitana, Montserrat } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./ui/globals.css";
 import SideNav from "./ui/header/sidenav";
 
@@ -11,12 +11,12 @@ export const metadata: Metadata = {
   description: 'The virtual marketplace for talented creators and customers.',
 };
 
-const funDisplay = lusitana({
+const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
 
-const montserrat = Montserrat({
+const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
@@ -28,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${funDisplay.variable} ${montserrat.variable}`}>
+      <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <SideNav />
         {children}
       </body>
