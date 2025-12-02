@@ -7,15 +7,6 @@ export type User = {
     usertype_id: number;
 };
 
-export type UserType = {
-    id: number;
-    type: 'seller' | 'buyer';
-    display_name: string;
-    email: string;
-    password: string;
-    usertype_id: string;
-};
-
 export type Product = {
     id: string;
     Price: string;
