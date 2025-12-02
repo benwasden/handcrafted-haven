@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Funnel_Display, Montserrat } from "next/font/google";
+import { lusitana, Montserrat } from "next/font/google";
 import "./ui/globals.css";
 import SideNav from "./ui/header/sidenav";
 
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   description: 'The virtual marketplace for talented creators and customers.',
 };
 
-const funDisplay = Funnel_Display({
+const funDisplay = lusitana({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
