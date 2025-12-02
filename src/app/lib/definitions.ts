@@ -3,6 +3,8 @@ export type User = {
     name: string;
     email: string;
     password: string;
+    friendly_name: string;
+    usertype_id: number;
 };
 
 export type UserType = {

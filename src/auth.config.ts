@@ -16,6 +16,11 @@ export const authConfig = {
             }
             return true;
         },
+        // session: async ({ session, user }) => {
+        //     if (user) {
+        //         session.user.usertype_id = user.usertype_id
+        //     }
+        // }
     },
     providers: [],
 } satisfies NextAuthConfig;
