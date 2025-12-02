@@ -98,6 +98,7 @@ export async function fetchSellers(): Promise<User[]> {
         display_name AS "display_name",
         friendly_name
       FROM users
+      WHERE usertype = 'seller'
       ORDER BY display_name
         `;
     // console.log('Sellers data fetched:', data);
@@ -119,7 +120,7 @@ export async function fetchSellersInfo(): Promise<User[]> {
         email,
         friendly_name
       FROM users
-      WHERE usertype_id = 1
+      WHERE usertype = 'seller'
       ORDER BY display_name
         `;
     // console.log('Sellers data fetched:', data);
