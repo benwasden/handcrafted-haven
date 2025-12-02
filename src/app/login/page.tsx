@@ -1,7 +1,13 @@
-export default function Login() {
+import { Suspense } from "react";
+import LoginForm from "../ui/login-form";
+
+
+export default function LoginPage() {
     return (
         <div>
-            <h2>Login page will go here</h2>
+            <Suspense>
+                <LoginForm />
+            </Suspense>
         </div>
     )
 }
