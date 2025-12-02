@@ -4,6 +4,7 @@ export type User = {
     email: string;
     password: string;
     friendly_name: string;
+    usertype_id: number;
 };
 
 export type UserType = {
