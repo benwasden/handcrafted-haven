@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./ui/globals.css";
 import SideNav from "./ui/header/sidenav";
+import { Providers } from "./providers";
 
 export const metadata: Metadata = {
   title: {
@@ -29,7 +30,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <SideNav />
+        <Providers>
+          <SideNav />
+        </Providers>
         {children}
       </body>
     </html>
