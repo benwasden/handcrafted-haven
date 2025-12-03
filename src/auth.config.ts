@@ -5,6 +5,18 @@ export const authConfig = {
         signIn: '/login',
     },
     callbacks: {
+        async jwt({ token, user }) {
+            if (user) {
+                token.usertype = user.usertype;
+            }
+            return token;
+        },
+        async session({ session, token }) {
+            if (session.user) {
+                session.user.usertype = token.usertype as string | undefined;
+            }
+            return session;
+        },
         authorized({ auth, request: { nextUrl } }) {
             const isLoggedIn = !!auth?.user;
             const isOnList = nextUrl.pathname.startsWith('/list');
@@ -16,11 +28,6 @@ export const authConfig = {
             }
             return true;
         },
-        // session: async ({ session, user }) => {
-        //     if (user) {
-        //         session.user.usertype_id = user.usertype_id
-        //     }
-        // }
     },
     providers: [],
 } satisfies NextAuthConfig;

@@ -1,12 +1,9 @@
+'use client';
+
 import Link from 'next/link';
 import { signOut } from '@/auth';
 import { useSession } from 'next-auth/react';
-
-const signingOut =
-  <form action={async () => {
-    'use server';
-    await signOut({ redirectTo: '/' });
-  }}></form>
+import { PowerIcon } from '@heroicons/react/24/outline';
 
 const links = [
   { name: 'Home', href: '/' },
@@ -15,19 +12,10 @@ const links = [
   { name: 'Login', href: '/login'},
 ];
 
-const logIn = { name: 'Login', href: '/login' };
-
-export function addLogin() {
-  links.push(logIn);
-}
-
-export function loggedInLinks() {
-  if (links.includes(logIn)) {
-    links.splice(4);
-  }
-}
-
 export default function NavLinks() {
+  const { data: session, status } = useSession();
+
+
   return (
     <>
       {links.map((link) => {
@@ -40,6 +28,9 @@ export default function NavLinks() {
           </Link>
         );
       })}
+      {session?.user?.usertype === 'seller' && (
+        <Link href="/list"><p>Login</p></Link>
+      )}
     </>
   );
 }
