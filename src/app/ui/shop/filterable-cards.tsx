@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import { Product, Category, Gender, Age_Groups, User } from '@/app/lib/definitions';
+import Link from 'next/link';
 
 type FilterableCardsProps = {
     products: Product[];
@@ -186,9 +187,11 @@ export default function FilterableCards({
                     filteredProducts.map((product) => (
                         <article key={product.id} className="product-card">
                             <div className="product-content">
-                                <img className="product-image" src={product.Image_URL} alt={product.Product_Name} />
-                                <h2 className="product-name">{product.Product_Name}</h2>
-                                <p className="product-price">${product.Price}</p>
+                                <Link href={`../products/${product.id}`}>
+                                    <img className="product-image" src={product.Image_URL} alt={product.Product_Name} />
+                                    <h2 className="product-name">{product.Product_Name}</h2>
+                                    <p className="product-price">${product.Price}</p>
+                                </Link>
 
                             </div>
                         </article>
