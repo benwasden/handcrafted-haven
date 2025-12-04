@@ -1,33 +1,22 @@
 import type { NextAuthConfig } from "next-auth";
 
 export const authConfig = {
-    pages: {
-        signIn: '/login',
+  providers: [],
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+       
+        token.usertype = (user as any).usertype;
+      }
+      return token;
     },
-    callbacks: {
-        async jwt({ token, user }) {
-            if (user) {
-                token.usertype = user.usertype;
-            }
-            return token;
-        },
-        async session({ session, token }) {
-            if (session.user) {
-                session.user.usertype = token.usertype as string | undefined;
-            }
-            return session;
-        },
-        authorized({ auth, request: { nextUrl } }) {
-            const isLoggedIn = !!auth?.user;
-            const isOnList = nextUrl.pathname.startsWith('/list');
-            if (isOnList) {
-                if (isLoggedIn) {
-                    return true;
-                }
-                return false;
-            }
-            return true;
-        },
+
+    async session({ session, token }) {
+      if (session.user) {
+        // @ts-ignore
+        session.user.usertype = token.usertype;
+      }
+      return session;
     },
-    providers: [],
+  },
 } satisfies NextAuthConfig;

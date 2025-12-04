@@ -34,10 +34,10 @@ export default function NavLinks() {
         <Link href="/login"><p>Login</p></Link>
       )}
 
-      {/* Logged-in buyer
+      {/* Logged-in buyer */}
       {status === "authenticated" && userType === "buyer" && (
         <Link href="/buyer-dashboard"><p>Dashboard</p></Link>
-      )} */}
+      )} 
 
       {/* Logged-in seller */}
       {status === "authenticated" && userType === "seller" && (

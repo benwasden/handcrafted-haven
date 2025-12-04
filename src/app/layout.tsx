@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./ui/globals.css";
 import SideNav from "./ui/header/sidenav";
 import { Providers } from "./providers";
+import { auth } from "@/auth"; //added auth helper
 
 export const metadata: Metadata = {
   title: {
@@ -22,18 +23,23 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export default function RootLayout({
+
+{/* added async */ } 
+export default async function RootLayout({ 
+  
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await auth();
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <Providers>
+        <Providers session={session}>
           <SideNav />
+          {children} {/*moved inside Providers */}
         </Providers>
-        {children}
+        
       </body>
     </html>
   );
