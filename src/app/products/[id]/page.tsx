@@ -62,7 +62,24 @@ export default async function ProductPage({ params }: ProductPageProps) {
             ))}
           </ul>
         </section>
-      )}
+          )}
+          <form>
+              <h2 className="text-xl font-semibold mt-6 mb-2">Review</h2>
+              <textarea
+                  className="w-full border rounded p-2 mb-2"
+                  placeholder="Write your review here..."
+              ></textarea>
+              <br />
+              <label className="mr-2">Rating:</label>
+              <select className="border rounded p-1">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+              </select>
+              <button className="dropbtn">Save</button>
+          </form>
     </main>
   );
 }
