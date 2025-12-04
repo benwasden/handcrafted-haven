@@ -1,6 +1,9 @@
 
-import { getProductById, getRatingsByProductId } from "@/app/lib/data";
+import { getProductById, getRatingsByProductId, addReview, getUserByEmail } from "@/app/lib/data";
 import { notFound } from "next/navigation";
+import { revalidatePath } from "next/cache";
+import { auth } from "@/auth";
+
 
 type ProductPageParams = { id: string };
 type ProductPageProps = { params: Promise<ProductPageParams> };
@@ -12,9 +15,41 @@ export default async function ProductPage({ params }: ProductPageProps) {
     getProductById(id),
     getRatingsByProductId(id),
   ]);
+    
 
   if (!product) {
     notFound();
+  }
+    async function handleSubmit(formData: FormData) {
+    "use server";
+
+    const productId = formData.get("productId") as string;
+
+    // 1️⃣ Get session
+    const session = await auth();
+
+    // 2️⃣ If not logged in, send them to login
+    if (!session?.user?.email) {
+      redirect(`/login?callbackUrl=/products/${productId}`);
+    }
+
+    // 3️⃣ Look up the user in your DB using email
+    const dbUser = await getUserByEmail(session.user.email!);
+    if (!dbUser) {
+      throw new Error("Logged-in user not found in database.");
+    }
+
+    const userId = dbUser.id; // this is what reviews.user_id expects
+
+    // 4️⃣ Get rating + comment from form
+    const rating = Number(formData.get("rating"));
+    const comment = (formData.get("comment") as string) ?? "";
+
+    // 5️⃣ Save review
+    await addReview(productId, userId, rating, comment);
+
+    // 6️⃣ Revalidate this product page
+    revalidatePath(`/products/${productId}`);
   }
 
   // Average rating
@@ -63,15 +98,19 @@ export default async function ProductPage({ params }: ProductPageProps) {
           </ul>
         </section>
           )}
-          <form>
+          <form action={handleSubmit} className="mt-6">
               <h2 className="text-xl font-semibold mt-6 mb-2">Review</h2>
+              <input type="hidden" name="productId" value={product.id} />
+              {/* Uncomment for testing
+              <input type="hidden" name="userId" value="5" /> */}
               <textarea
+                  name="comment"
                   className="w-full border rounded p-2 mb-2"
                   placeholder="Write your review here..."
               ></textarea>
               <br />
               <label className="mr-2">Rating:</label>
-              <select className="border rounded p-1">
+              <select name="rating" className="border rounded p-1">
                   <option value="1">1</option>
                   <option value="2">2</option>
                   <option value="3">3</option>

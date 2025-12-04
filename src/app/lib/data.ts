@@ -188,3 +188,39 @@ export async function getRatingsByProductId(
 }
 
 
+export async function addReview(
+  productId: string,
+  userId: string,
+  rating: number,
+  comment: string
+) {
+  try {
+    await sql`
+      INSERT INTO reviews (product_id, user_id, rating, comment)
+      VALUES (${productId}, ${userId}, ${rating}, ${comment})
+    `;
+  } catch (error) {
+    console.error("Error adding review:", error);
+    throw new Error("Failed to add review");
+  }
+}
+
+export async function getUserByEmail(email: string): Promise<User | null> {
+  try {
+    const data = await sql<User[]>`
+      SELECT
+        id,
+        display_name AS "display_name",
+        email,
+        friendly_name
+      FROM users
+      WHERE email = ${email}
+      LIMIT 1
+    `;
+
+    return data[0] ?? null;
+  } catch (error) {
+    console.error("Error fetching user by email:", error);
+    throw new Error("Failed to fetch user");
+  }
+}
