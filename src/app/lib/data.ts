@@ -1,5 +1,5 @@
 import postgres from 'postgres';
-import { Product, Category, Gender, Age_Groups, User } from './definitions';
+import { Product, Category, Gender, Age_Groups, User, ReviewWithUser } from './definitions';
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 
@@ -128,5 +128,99 @@ export async function fetchSellersInfo(): Promise<User[]> {
   } catch (error) {
     // console.error('Error fetching sellers data:', error);
     throw new Error('Failed to fetch sellers data');
+  }
+}
+
+export async function getProductById(id: string): Promise<Product | null> {
+  try {
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+
+    const data = await sql<Product[]>`
+      SELECT
+        p.id,
+        p.product_name AS "Product_Name",
+        p.price        AS "Price",
+        p.description  AS "Description",
+        p.image_url    AS "Image_URL",
+        p.user_id      AS "User_ID",
+        s.friendly_name AS "Seller_Name"
+      FROM products p
+      JOIN users s ON p.user_id = s.id
+      WHERE p.id = ${id}
+      LIMIT 1
+    `;
+
+    return data[0] ?? null;
+  } catch (error) {
+    console.error("Error fetching product data:", error);
+    throw new Error("Failed to fetch product data");
+  }
+}
+
+
+
+
+export async function getRatingsByProductId(
+  productId: string
+): Promise<ReviewWithUser[]> {
+  try {
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+
+    const data = await sql<ReviewWithUser[]>`
+      SELECT
+        r.id,
+        r.rating,          -- OR: r.rating_value AS "rating" if your column is rating_value
+        r.comment,
+        r.product_id,
+        r.user_id,
+        u.display_name AS "Rater_Name"
+      FROM reviews r
+      JOIN users u ON r.user_id = u.id
+      WHERE r.product_id = ${productId}
+      ORDER BY r.id DESC
+    `;
+
+    return data;
+  } catch (error) {
+    console.error("Error fetching product rating data:", error);
+    throw new Error("Failed to fetch product rating data");
+  }
+}
+
+
+export async function addReview(
+  productId: string,
+  userId: string,
+  rating: number,
+  comment: string
+) {
+  try {
+    await sql`
+      INSERT INTO reviews (product_id, user_id, rating, comment)
+      VALUES (${productId}, ${userId}, ${rating}, ${comment})
+    `;
+  } catch (error) {
+    console.error("Error adding review:", error);
+    throw new Error("Failed to add review");
+  }
+}
+
+export async function getUserByEmail(email: string): Promise<User | null> {
+  try {
+    const data = await sql<User[]>`
+      SELECT
+        id,
+        display_name AS "display_name",
+        email,
+        friendly_name
+      FROM users
+      WHERE email = ${email}
+      LIMIT 1
+    `;
+
+    return data[0] ?? null;
+  } catch (error) {
+    console.error("Error fetching user by email:", error);
+    throw new Error("Failed to fetch user");
   }
 }

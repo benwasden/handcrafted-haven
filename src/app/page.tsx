@@ -10,6 +10,7 @@ import {
   fetchSellers,
 } from '@/app/lib/data';
 import FilterableCards from '@/app/ui/shop/filterable-cards';
+import Link from "next/link";
 
 
 export const metadata: Metadata = {
