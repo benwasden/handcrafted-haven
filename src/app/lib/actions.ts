@@ -2,13 +2,20 @@
 
 import { signIn } from '@/auth';
 import { AuthError } from 'next-auth';
+import { redirect } from 'next/navigation';
 
 export async function authenticate(
     prevState: string | undefined,
     formData: FormData,
 ) {
+    const redirectTo = (formData.get('redirectTo') as string) || '/';
     try {
-        await signIn('credentials', formData);
+        await signIn('credentials', {
+            redirect: false,
+            email: formData.get('email'),
+            password: formData.get('password'),
+        });
+        redirect(redirectTo);
     } catch (error) {
         if (error instanceof AuthError) {
             switch (error.type) {

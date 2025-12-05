@@ -1,12 +1,7 @@
-import Link from 'next/link';
-import { signOut } from '@/auth';
-import { useSession } from 'next-auth/react';
+'use client';
 
-const signingOut =
-  <form action={async () => {
-    'use server';
-    await signOut({ redirectTo: '/' });
-  }}></form>
+import Link from 'next/link';
+import { useSession } from 'next-auth/react';
 
 const links = [
   { name: 'Home', href: '/' },
@@ -15,31 +10,58 @@ const links = [
   { name: 'Login', href: '/login'},
 ];
 
-const logIn = { name: 'Login', href: '/login' };
-
-export function addLogin() {
-  links.push(logIn);
-}
-
-export function loggedInLinks() {
-  if (links.includes(logIn)) {
-    links.splice(4);
-  }
-}
-
 export default function NavLinks() {
+  const { data: session, status } = useSession();
+
+  const userType = session?.user?.usertype;
+
+  console.log("SESSION", session);
+  console.log("USERTYPE", session?.user?.usertype);
+
+  if (status === "loading") {
+    return null;
+  }
+
   return (
     <>
-      {links.map((link) => {
-        return (
-          <Link
-            key={link.name}
-            href={link.href}
-          >
-            <p>{link.name}</p>
-          </Link>
-        );
-      })}
+      {/* Always-visible links */}
+      <Link href="/"><p>Home</p></Link>
+      <Link href="/shop"><p>Store</p></Link>
+      <Link href="/sellers"><p>Sellers</p></Link>
+
+      {/* Logged-out user */}
+      {status === "unauthenticated" && (
+        <Link href="/login"><p>Login</p></Link>
+      )}
+
+      {/* Logged-in buyer */}
+      {status === "authenticated" && userType === "buyer" && (
+        <Link href="/buyer-dashboard"><p>Dashboard</p></Link>
+      )} 
+
+      {/* Logged-in seller */}
+      {status === "authenticated" && userType === "seller" && (
+        <Link href="/list"><p>List</p></Link>
+      )}
     </>
   );
+
+
+  // return (
+  //   <>
+  //     {links.map((link) => {
+  //       return (
+  //         <Link
+  //           key={link.name}
+  //           href={link.href}
+  //         >
+  //           <p>{link.name}</p>
+  //         </Link>
+  //       );
+  //     })}
+  //     {session?.user?.usertype === 'seller' && (
+  //       <Link href="/list"><p>Login</p></Link>
+  //     )}
+  //   </>
+  // );
 }

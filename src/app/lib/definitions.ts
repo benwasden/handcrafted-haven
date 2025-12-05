@@ -4,7 +4,7 @@ export type User = {
     email: string;
     password: string;
     friendly_name: string;
-    usertype_id: number;
+    usertype: string;
 };
 
 export interface Product {
