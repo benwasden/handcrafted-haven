@@ -3,6 +3,7 @@ import { getProductById, getRatingsByProductId, addReview, getUserByEmail } from
 import { notFound } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { auth } from "@/auth";
+import Link from "next/link";
 
 
 type ProductPageParams = { id: string };
@@ -20,6 +21,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
   if (!product) {
     notFound();
   }
+    const session = await auth();
+
     async function handleSubmit(formData: FormData) {
     "use server";
 
@@ -74,7 +77,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
       {averageRating !== null ? (
         <p className="mt-2">
-          Average Rating: {averageRating.toFixed(1)} / 5 ({reviews.length}{" "}
+          Average Rating: {averageRating.toFixed(1)} / 10 ({reviews.length}{" "}
           review{reviews.length === 1 ? "" : "s"})
         </p>
       ) : (
@@ -88,7 +91,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
             {reviews.map((review) => (
               <li key={review.id} className="border rounded p-3">
                 <p className="font-semibold">
-                  {review.Rater_Name} — {review.rating} / 5
+                  {review.Rater_Name} — {review.rating} / 10
                 </p>
                 {review.comment && (
                   <p className="text-sm mt-1">{review.comment}</p>
@@ -98,27 +101,47 @@ export default async function ProductPage({ params }: ProductPageProps) {
           </ul>
         </section>
           )}
-          <form action={handleSubmit} className="mt-6">
-              <h2 className="text-xl font-semibold mt-6 mb-2">Review</h2>
-              <input type="hidden" name="productId" value={product.id} />
-              {/* Uncomment for testing
+
+          <h2 className="text-xl font-semibold mt-6 mb-2">Reviews</h2>
+          {!session?.user ? (
+              // Not logged in → show message
+              <div className="border p-4 rounded-lg bg-gray-50 text-center">
+                  <p className="mb-2">You must be logged in to leave a review.</p>
+                  <Link
+                      href={`/login?callbackUrl=/products/${id}`}
+                      className="text-blue-600 underline"
+                  >
+                      Log in to leave a review →
+                  </Link>
+              </div>
+          ) : (
+              <form action={handleSubmit} className="mt-6">
+              
+                  <input type="hidden" name="productId" value={product.id} />
+                  {/* Uncomment for testing
               <input type="hidden" name="userId" value="5" /> */}
-              <textarea
-                  name="comment"
-                  className="w-full border rounded p-2 mb-2"
-                  placeholder="Write your review here..."
-              ></textarea>
-              <br />
-              <label className="mr-2">Rating:</label>
-              <select name="rating" className="border rounded p-1">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-              </select>
-              <button className="dropbtn">Save</button>
-          </form>
+                  <textarea
+                      name="comment"
+                      className="w-full border rounded p-2 mb-2"
+                      placeholder="Write your review here..."
+                  ></textarea>
+                  <br />
+                  <label className="mr-2">Rating:</label>
+                  <select name="rating" className="border rounded p-1">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                  </select>
+                  <button className="dropbtn">Save</button>
+              </form>
+          )}
     </main>
   );
 }
