@@ -2,8 +2,8 @@
   --background: #fafafa;
   --foreground: #fff;
 
-  --text-primary: #000;
-  --text-secondary: #666;
+  --text-primary: #222E50;
+  --text-secondary: #222E50;
 
   --button-primary-hover: #383838;
   --button-secondary-hover: #f2f2f2;
@@ -29,6 +29,9 @@
   padding: 120px 60px;
 } */
 
+.reviewComment {
+  color: var(--text-primary);
+}
 
 .intro h1 {
   max-width: 600px;
@@ -85,6 +88,10 @@ a.primary {
 
 a.secondary {
   border-color: var(--button-secondary-border);
+}
+
+.product-content h2 {
+  color: var(--text-primary)
 }
 
 /* Enable hover only on non-touch devices */
