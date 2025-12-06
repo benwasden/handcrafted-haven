@@ -1,12 +1,12 @@
 import postgres from 'postgres';
-import { Product, Category, Gender, Age_Groups, User, ReviewWithUser } from './definitions';
+import { Product, Category, Gender, Age_Groups, User, ReviewWithUser, Products } from './definitions';
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 
 export async function fetchCatalog(): Promise<Product[]> {
   try {
     // console.log('Fetching catalog data...');
-    await new Promise((resolve) => setTimeout(resolve, 3000));
+    // await new Promise((resolve) => setTimeout(resolve, 3000));
 
     const data = await sql<Product[]>`
       SELECT
@@ -34,7 +34,7 @@ export async function fetchCatalog(): Promise<Product[]> {
 export async function fetchCategories(): Promise<Category[]> {
   try {
     // console.log('Fetching categories data...');
-    await new Promise((resolve) => setTimeout(resolve, 3000));
+    // await new Promise((resolve) => setTimeout(resolve, 3000));
     const data = await sql<Category[]>`
       SELECT
         id,
@@ -53,7 +53,7 @@ export async function fetchCategories(): Promise<Category[]> {
 export async function fetchGenders(): Promise<Gender[]> {
   try {
     // console.log(`Fetching gender data...`);
-    await new Promise((resolve) => setTimeout(resolve, 3000));
+    // await new Promise((resolve) => setTimeout(resolve, 3000));
     const data = await sql<Gender[]>`
       SELECT
         id,
@@ -72,7 +72,7 @@ export async function fetchGenders(): Promise<Gender[]> {
 export async function fetchAgeGroups(): Promise<Age_Groups[]> {
   try {
     // console.log(`Fetching age groups data...`);
-    await new Promise((resolve) => setTimeout(resolve, 3000));
+    // await new Promise((resolve) => setTimeout(resolve, 3000));
     const data = await sql<Age_Groups[]>`
       SELECT
         id,
@@ -112,7 +112,7 @@ export async function fetchSellers(): Promise<User[]> {
 export async function fetchSellersInfo(): Promise<User[]> {
   try {
     // console.log(`Fetching sellers data...`);
-    await new Promise((resolve) => setTimeout(resolve, 3000));
+    // await new Promise((resolve) => setTimeout(resolve, 3000));
     const data = await sql<User[]>`
       SELECT
         id,
@@ -133,7 +133,7 @@ export async function fetchSellersInfo(): Promise<User[]> {
 
 export async function getProductById(id: string): Promise<Product | null> {
   try {
-    await new Promise((resolve) => setTimeout(resolve, 3000));
+    // await new Promise((resolve) => setTimeout(resolve, 3000));
 
     const data = await sql<Product[]>`
       SELECT
@@ -164,12 +164,12 @@ export async function getRatingsByProductId(
   productId: string
 ): Promise<ReviewWithUser[]> {
   try {
-    await new Promise((resolve) => setTimeout(resolve, 3000));
+    // await new Promise((resolve) => setTimeout(resolve, 3000));
 
     const data = await sql<ReviewWithUser[]>`
       SELECT
         r.id,
-        r.rating,          -- OR: r.rating_value AS "rating" if your column is rating_value
+        r.rating,
         r.comment,
         r.product_id,
         r.user_id,
@@ -222,5 +222,46 @@ export async function getUserByEmail(email: string): Promise<User | null> {
   } catch (error) {
     console.error("Error fetching user by email:", error);
     throw new Error("Failed to fetch user");
+  }
+}
+
+export async function getSellerById(id: number): Promise<User[]> {
+  try {
+    // console.log(`Fetching sellers data...`);
+    // await new Promise((resolve) => setTimeout(resolve, 3000));
+    const data = await sql<User[]>`
+      SELECT
+        id,
+        friendly_name
+      FROM users
+      WHERE id = ${id}
+      ORDER BY display_name
+        `;
+    // console.log('Sellers data fetched:', data);
+    return data;
+  } catch (error) {
+    // console.error('Error fetching sellers data:', error);
+    throw new Error('Failed to fetch sellers data');
+  }
+}
+
+export async function getProductsBySellerId(id: number): Promise<Products[]> {
+  try {
+    // await new Promise((resolve) => setTimeout(resolve, 3000));
+
+    const data = await sql<Products[]>`
+      SELECT
+        id,
+        product_name,
+        price,
+        image_url,
+        user_id
+      FROM products
+      WHERE user_id = ${id}
+    `;
+      return data ?? null;
+  } catch (error) {
+    console.error("Error fetching product data:", error);
+    throw new Error("Failed to fetch product data");
   }
 }
