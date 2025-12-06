@@ -11,6 +11,7 @@ export default function NavLinks() {
 
   console.log("SESSION", session);
   console.log("USERTYPE", session?.user?.usertype);
+  console.log("USER", session?.user?.id);
 
   if (status === "loading") {
     return null;

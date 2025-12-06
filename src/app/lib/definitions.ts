@@ -20,6 +20,15 @@ export interface Product {
     Seller_Name: string;
 };
 
+export interface Products {
+    id: number;
+    price: number;
+    product_name: string;
+    description: string;
+    image_url: string;
+    user_id: string;
+};
+
 export type Category = {
     id: string;
     Category_Name: string;

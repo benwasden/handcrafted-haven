@@ -7,6 +7,7 @@ export const authConfig = {
       if (user) {
        
         token.usertype = (user as any).usertype;
+        token.id = user.id;
       }
       return token;
     },
@@ -15,6 +16,7 @@ export const authConfig = {
       if (session.user) {
         // @ts-ignore
         session.user.usertype = token.usertype;
+        session.user.id = token.id;
       }
       return session;
     },
