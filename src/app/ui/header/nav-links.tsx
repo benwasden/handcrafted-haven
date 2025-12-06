@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
+import SignOutForm from './logout';
 
 const links = [
   { name: 'Home', href: '/' },
@@ -42,6 +43,12 @@ export default function NavLinks() {
       {/* Logged-in seller */}
       {status === "authenticated" && userType === "seller" && (
         <Link href="/list"><p>List</p></Link>
+      )}
+
+      {status === "authenticated" && (
+        <form action={SignOutForm}>
+          <button>Sign Out</button>
+        </form>
       )}
     </>
   );
