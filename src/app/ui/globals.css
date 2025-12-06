@@ -114,6 +114,11 @@ a {
   background: #f3f4f6;
 }
 
+.product-card:hover {
+  background-color: #1B9AAA;
+
+}
+
 /* Products */
 .product-grid {
   display: grid;
