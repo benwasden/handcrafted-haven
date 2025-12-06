@@ -4,13 +4,6 @@ import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import SignOutForm from './logout';
 
-const links = [
-  { name: 'Home', href: '/' },
-  { name: 'Store', href: '/shop' },
-  { name: 'Sellers', href: '/sellers' },
-  { name: 'Login', href: '/login'},
-];
-
 export default function NavLinks() {
   const { data: session, status } = useSession();
 
@@ -36,9 +29,9 @@ export default function NavLinks() {
       )}
 
       {/* Logged-in buyer */}
-      {status === "authenticated" && userType === "buyer" && (
+      {/* {status === "authenticated" && userType === "buyer" && (
         <Link href="/buyer-dashboard"><p>Dashboard</p></Link>
-      )} 
+      )}  */}
 
       {/* Logged-in seller */}
       {status === "authenticated" && userType === "seller" && (
