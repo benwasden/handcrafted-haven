@@ -1,6 +1,6 @@
 
 import { getProductById, getRatingsByProductId, addReview, getUserByEmail } from "@/app/lib/data";
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { auth } from "@/auth";
 import Link from "next/link";
