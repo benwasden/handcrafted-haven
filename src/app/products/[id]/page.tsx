@@ -4,6 +4,7 @@ import { notFound, redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { auth } from "@/auth";
 import Link from "next/link";
+import styles from "../../ui/product.module.css";
 
 
 type ProductPageParams = { id: string };
@@ -16,14 +17,14 @@ export default async function ProductPage({ params }: ProductPageProps) {
     getProductById(id),
     getRatingsByProductId(id),
   ]);
-    
+
 
   if (!product) {
     notFound();
   }
-    const session = await auth();
+  const session = await auth();
 
-    async function handleSubmit(formData: FormData) {
+  async function handleSubmit(formData: FormData) {
     "use server";
 
     const productId = formData.get("productId") as string;
@@ -63,85 +64,82 @@ export default async function ProductPage({ params }: ProductPageProps) {
   }
 
   return (
-    <main className="p-6">
-      <h1 className="text-2xl font-bold mb-4">{product.Product_Name}</h1>
+    <main className={styles.pageContainer}>
+      <h1 className={styles.title}>{product.Product_Name}</h1>
 
-      <img src={`../${product.Image_URL}`} alt={product.Product_Name} />
+      <div className={styles.productContainer}>
+        <div className={styles.productImage}>
+          <img src={`../${product.Image_URL}`} alt={product.Product_Name} />
+        </div>
 
-      <p className="mb-2">
-        <span className="font-semibold">{product.Description}</span>
-      </p>
+        <div className={styles.productDetails}>
+          <p className={styles.description}>{product.Description}</p>
+          <p className={styles.price}>${product.Price}</p>
+        </div>
+      </div>
 
-      <p className="mb-4">Price: ${product.Price}</p>
-      <p className="mb-4">Sold by: {product.Seller_Name}</p>
+      
 
       {averageRating !== null ? (
-        <p className="mt-2">
-          Average Rating: {averageRating.toFixed(1)} / 10 ({reviews.length}{" "}
-          review{reviews.length === 1 ? "" : "s"})
+        <p className={styles.averageRating}>
+          Average Rating: {averageRating.toFixed(1)} / 10 ({reviews.length} review
+          {reviews.length === 1 ? "" : "s"})
         </p>
       ) : (
-        <p className="mt-2 italic">No ratings yet.</p>
+        <p className={styles.noRating}>No ratings yet.</p>
       )}
 
       {reviews.length > 0 && (
-        <section className="mt-6">
-          <h2 className="text-xl font-semibold mb-2">Customer Reviews</h2>
-          <ul className="space-y-3">
+        <section className={styles.reviewsBox}>
+          <h2 className={styles.reviewsTitle}>Customer Reviews</h2>
+          <ul className={styles.reviewsList}>
             {reviews.map((review) => (
-              <li key={review.id} className="border rounded p-3">
-                <p className="font-semibold">
+              <li key={review.id} className={styles.reviewItem}>
+                <p className={styles.reviewAuthor}>
                   {review.Rater_Name} — {review.rating} / 10
                 </p>
                 {review.comment && (
-                  <p className="text-sm mt-1">{review.comment}</p>
+                  <p className={styles.reviewComment}>{review.comment}</p>
                 )}
               </li>
             ))}
           </ul>
         </section>
-          )}
+      )}
 
-          <h2 className="text-xl font-semibold mt-6 mb-2">Reviews</h2>
-          {!session?.user ? (
-              // Not logged in → show message
-              <div className="border p-4 rounded-lg bg-gray-50 text-center">
-                  <p className="mb-2">You must be logged in to leave a review.</p>
-                  <Link
-                      href={`/login?callbackUrl=/products/${id}`}
-                      className="text-blue-600 underline"
-                  >
-                      Log in to leave a review →
-                  </Link>
-              </div>
-          ) : (
-              <form action={handleSubmit} className="mt-6">
-              
-                  <input type="hidden" name="productId" value={product.id} />
-                  {/* Uncomment for testing
-              <input type="hidden" name="userId" value="5" /> */}
-                  <textarea
-                      name="comment"
-                      className="w-full border rounded p-2 mb-2"
-                      placeholder="Write your review here..."
-                  ></textarea>
-                  <br />
-                  <label className="mr-2">Rating:</label>
-                  <select name="rating" className="border rounded p-1">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                  </select>
-                  <button className="dropbtn">Save</button>
-              </form>
-          )}
+
+      <h2 className={styles.reviewsTitle}>Reviews</h2>
+
+      {!session?.user ? (
+        <div className={styles.loginNotice}>
+          <p>You must be logged in to leave a review.</p>
+          <Link href={`/login?callbackUrl=/products/${id}`} className={styles.loginLink}>
+            Log in to leave a review →
+          </Link>
+        </div>
+      ) : (
+        <form action={handleSubmit} className={styles.formBox}>
+          <input type="hidden" name="productId" value={product.id} />
+
+          <textarea
+            name="comment"
+            className={styles.commentInput}
+            placeholder="Write your review here..."
+          ></textarea>
+
+          <div className={styles.ratingRow}>
+            <label>Rating:</label>
+            <select name="rating" className={styles.ratingSelect}>
+              {Array.from({ length: 10 }, (_, i) => i + 1).map((r) => (
+                <option key={r} value={r}>{r}</option>
+              ))}
+            </select>
+          </div>
+
+          <button className={styles.saveButton}>Save</button>
+        </form>
+      )}
+
     </main>
   );
 }
