@@ -1,5 +1,6 @@
 import { getProductsBySellerId } from "@/app/lib/data";
 import { Products } from "@/app/lib/definitions";
+import { DeleteItem } from "./buttons";
 
 import Link from "next/link";
 
@@ -22,7 +23,7 @@ export default async function ItemsTable({ id }: { id: number} ) {
                             <td>${item.price}</td>
                             <td>{item.description}</td>
                             <td><Link href={`/list/${item.user_id}/${item.id}/edit`}>Edit</Link></td>
-                            <td></td>
+                            <td><DeleteItem id={item.id} /></td>
                         </tr>
                 ))}
             </tbody>

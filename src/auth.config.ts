@@ -20,18 +20,29 @@ export const authConfig = {
       }
       return session;
     },
-    authorized( {auth, request: { nextUrl }}) {
-      const isLoggedIn = !!auth?.user;
-      const isUser = !!auth?.user.id;
-      const isOnList = nextUrl.pathname.startsWith('/list');
-      const isOnRightList = nextUrl.pathname.startsWith(`/list/${!!auth?.user.id}`)
-      if (isOnRightList) {
-        if (isUser) {
-          return true;
-        }
-        return false;
-      } 
+    authorized({ auth, request: { nextUrl } }) {
+      const user = auth?.user;
+      const userId = user?.id;
+
+      const pathname = nextUrl.pathname;
+
+      if (!pathname.startsWith('/list')) {
+        return true;
+      }
+    
+      if (!userId) {
+        return Response.redirect(new URL("/", nextUrl));
+      };
+    
+      const pathParts = pathname.split('/');
+      const listId = pathParts[2];
+    
+      if (!listId || listId !== userId) {
+        return Response.redirect(new URL(`/list/${userId}`, nextUrl));
+      }
+
+      // return listId === userId;
       return true;
-    }
+    }   
   },
 } satisfies NextAuthConfig;

@@ -2,7 +2,11 @@
 
 import { signIn } from '@/auth';
 import { AuthError } from 'next-auth';
+import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
+import postgres from 'postgres';
+
+const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 
 export async function authenticate(
     prevState: string | undefined,
@@ -26,5 +30,15 @@ export async function authenticate(
             }
         }
         throw error;
+    }
+}
+
+export async function deleteItem(id: number) {
+    try {
+        await sql`DELETE FROM products WHERE id = ${id}`;
+        revalidatePath('/list');
+    } catch (error) {
+        console.error("Error deleting product:", error);
+        throw new Error("Failed to delete product.");
     }
 }
