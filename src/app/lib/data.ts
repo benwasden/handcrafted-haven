@@ -255,6 +255,7 @@ export async function getProductsBySellerId(id: number): Promise<Products[]> {
         product_name,
         price,
         image_url,
+        description,
         user_id
       FROM products
       WHERE user_id = ${id}
