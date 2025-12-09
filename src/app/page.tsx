@@ -35,6 +35,7 @@ export default async function Home() {
               alt="handcrafted soap hero image"
               width={1600}
               height={600}
+              loading="eager"
             />
           </div>
 

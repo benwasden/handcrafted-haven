@@ -11,10 +11,6 @@ export default function NavLinks() {
   const userType = session?.user?.usertype;
   const userId = session?.user?.id;
 
-  // console.log("SESSION", session);
-  // console.log("USERTYPE", session?.user?.usertype);
-  // console.log("USER", session?.user?.id);
-
   if (status === "loading") {
     return null;
   }
@@ -29,7 +25,6 @@ export default function NavLinks() {
 
       {/* Logged-out user */}
       {status === "unauthenticated" && (
-        // <Link className="login-logout" href="/login"><p>Login</p></Link>
         <form className="login-logout" action="/login">
           <button className={montserrat.className}>Sign In</button>
         </form>
