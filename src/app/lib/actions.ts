@@ -88,3 +88,48 @@ export async function saveProductUpdate(formData: FormData) {
     await updateProductInfo(formData, imageUrl);
     redirect(`/list/${formData.get("user_id")}`);
 }
+
+export async function addProductInfo(formData: FormData, imageUrl: string | null = null) {
+  const price = Number(formData.get("price"));
+  const name = formData.get("productName") as string;
+  const description = formData.get("description") as string;
+  const category_id = Number(formData.get("category"));
+  const age_group_id = Number(formData.get("age_group"));
+  const gender_id = Number(formData.get("gender"));
+  const user_id = Number(formData.get("user_id"))
+
+  try {
+    await sql`
+      INSERT INTO products(price, product_name, description, image_url, category_id, age_group_id, gender_id, user_id)
+        VALUES (
+        ${price},
+        ${name},
+        ${description},
+        COALESCE(${imageUrl}, 'https://7l3i3uzrwkda4sse.public.blob.vercel-storage.com/product-images/placeholder.jpg'),
+        ${category_id},
+        ${age_group_id},
+        ${gender_id},
+        ${user_id}
+        )
+    `;
+  } catch (error) {
+    console.error("Error updating product data:", error);
+    throw new Error("Failed to update product data.");
+  }
+}
+
+export async function saveProduct(formData: FormData) {
+    const file = formData.get("image") as File | null;
+    let imageUrl = null
+
+    if (file && file.size > 0) {
+        const { url } = await put(`product-images/${file.name}`, file, {
+            access: "public",
+        });
+
+        imageUrl = url;
+    }
+
+    await addProductInfo(formData, imageUrl);
+    redirect(`/list/${formData.get("user_id")}`);
+}

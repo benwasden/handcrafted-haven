@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import ItemsTable from "@/app/ui/sellers/itemstable";
 import { getSellerById } from "@/app/lib/data";
+import Link from "next/link";
 
 export default async function ListPage(props: { params: Promise<{ id: number }>}) {
     const params = await props.params;
@@ -14,6 +15,7 @@ export default async function ListPage(props: { params: Promise<{ id: number }>}
 
     return (
         <>
+            <Link href={`/list/${id}/add`} className="addItem">Add Item</Link>
             <h1>{seller.friendly_name}'s Products:</h1>
             <Suspense key={seller.friendly_name + id}>
                 <ItemsTable id={id} />

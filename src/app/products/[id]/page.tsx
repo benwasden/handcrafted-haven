@@ -66,7 +66,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
     <main className="p-6">
       <h1 className="text-2xl font-bold mb-4">{product.Product_Name}</h1>
 
-      <img src={`../${product.Image_URL}`} alt={product.Product_Name} />
+      <img src={`${product.Image_URL}`} alt={product.Product_Name} />
 
       <p className="mb-2">
         <span className="font-semibold">{product.Description}</span>
