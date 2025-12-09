@@ -9,13 +9,13 @@ export default async function CardWrapper() {
             {products.map((product) => (
                 <div
                     key={product.id}
-                    className="rounded-xl border bg-white p-4 shadow-sm flex flex-col gap-2"
+                    className="product-card"
                 >
-                    <img className="h-48 w-full object-cover rounded-md" src={product.Image_URL} alt={product.Product_Name} />
-                    <h2 className="text-lg font-semibold">
+                    <img className="product-image" src={product.Image_URL} alt={product.Product_Name} />
+                    <h2 className="product-name">
                         {product.Product_Name}
                     </h2>
-                    <p className="mt-2 text-base font-bold">
+                    <p className="product-price">
                         ${product.Price}
                     </p>
                 </div>

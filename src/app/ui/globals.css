@@ -124,6 +124,8 @@ a {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 1.5rem;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .product-card {
@@ -192,3 +194,22 @@ tr:hover {
     color-scheme: dark;
   }
 } */
+
+/************** NAVIGATION ******************/
+.sidebar {
+    width: 100%;
+      background-color: #f4f4f4;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  background-color: #f4f4f4;
+  padding: 15px;
+}
+
+.login-logout {
+  margin-right: 10px;
+  margin-left: auto;;
+}
