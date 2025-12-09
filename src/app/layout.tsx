@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+// import { Geist, Geist_Mono } from "next/font/google";
+import { montserrat } from "@/app/ui/fonts";
 import "./ui/globals.css";
 import SideNav from "./ui/header/sidenav";
 import { Providers } from "./providers";
@@ -13,17 +14,6 @@ export const metadata: Metadata = {
   description: 'The virtual marketplace for talented creators and customers.',
 };
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-
 {/* added async */ } 
 export default async function RootLayout({ 
   
@@ -34,7 +24,7 @@ export default async function RootLayout({
   const session = await auth();
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body className={`${montserrat.className}`}>
         <Providers session={session}>
           <SideNav />
           {children} {/*moved inside Providers */}

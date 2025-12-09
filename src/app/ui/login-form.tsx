@@ -1,6 +1,6 @@
 'use client';
  
-import { lusitana } from '@/app/ui/fonts';
+import { funnel, montserrat } from '@/app/ui/fonts';
 import {
   AtSymbolIcon,
   KeyIcon,
@@ -50,9 +50,9 @@ export default function LoginForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-3">
+    <form onSubmit={handleSubmit} className="login-form">
       <div>
-        <h1 className={`${lusitana.className}`}>
+        <h1 className={`${funnel.className}`}>
           Please log in to continue.
         </h1>
         <div className="w-full">
@@ -95,12 +95,12 @@ export default function LoginForm() {
           </div>
         </div>
 
-        <Button className="mt-4 w-full" aria-disabled={isPending}>
-          Log in
+        <Button className={montserrat.className} id="login-button" aria-disabled={isPending}>
+          Sign In
         </Button>
 
         <div
-          className="flex h-8 items-end space-x-1"
+          className="login-error"
           aria-live="polite"
           aria-atomic="true"
         >
