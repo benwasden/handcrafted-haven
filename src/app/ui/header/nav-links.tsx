@@ -14,6 +14,10 @@ export default function NavLinks() {
   // console.log("USERTYPE", session?.user?.usertype);
   // console.log("USER", session?.user?.id);
 
+  const closeMenu = () => {
+    document.body.classList.remove('mobile-menu-open');
+  };
+
   if (status === "loading") {
     return null;
   }
@@ -22,13 +26,13 @@ export default function NavLinks() {
     <>
       <div className="nav-links">
       {/* Always-visible links */}
-      <Link href="/"><p>Home</p></Link>
-      <Link href="/shop"><p>Store</p></Link>
-      <Link href="/sellers"><p>Sellers</p></Link>
+      <Link href="/" onClick={closeMenu}><p>Home</p></Link>
+      <Link href="/shop" onClick={closeMenu}><p>Store</p></Link>
+      <Link href="/sellers" onClick={closeMenu}><p>Sellers</p></Link>
 
       {/* Logged-out user */}
       {status === "unauthenticated" && (
-        <Link className="login-logout" href="/login"><p>Login</p></Link>
+        <Link className="login-logout" href="/login" onClick={closeMenu}><p>Login</p></Link>
       )}
 
       {/* Logged-in buyer */}
@@ -38,7 +42,7 @@ export default function NavLinks() {
 
       {/* Logged-in seller */}
       {status === "authenticated" && userType === "seller" && (
-        <Link href={`/list/${userId}`}><p>My Items</p></Link>
+        <Link href={`/list/${userId}`} onClick={closeMenu}><p>My Items</p></Link>
       )}
 
       {status === "authenticated" && (
