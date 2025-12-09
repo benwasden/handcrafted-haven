@@ -1,7 +1,6 @@
 import Image from "next/image";
 import styles from "./ui/page.module.css";
 import { Metadata } from "next";
-import { lusitana } from '@/app/ui/fonts';
 import {
   fetchCatalog,
   fetchCategories,
@@ -38,10 +37,6 @@ export default async function Home() {
               height={600}
             />
           </div>
-
-          {/* <h1 className={`${lusitana.className} text-4xl font-bold mt-6`}>
-            HANDCRAFTED HAVEN
-          </h1>*/}
 
           {/* Filter + product grid */}
           <FilterableCards

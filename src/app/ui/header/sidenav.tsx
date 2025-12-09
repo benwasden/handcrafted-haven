@@ -1,8 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import NavLinks from './nav-links';
-import { signOut } from '@/auth';
-import { useSession } from "next-auth/react";
 
 export default function SideNav() {
   return (
