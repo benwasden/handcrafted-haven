@@ -247,7 +247,7 @@ tr:hover {
 /* MOBILE MENU  */
 @media (max-width: 550px) {
 
-  /* HAMBURGER – THREE LINES GUARANTEED */
+  /* HAMBURGER */
     .mobile-menu-toggle {
       position: fixed;
       top: 18px;
@@ -309,11 +309,12 @@ tr:hover {
   .sidebar {
     position: fixed !important;
     top: 0;
-    left: 0;
+    left: auto !important;
+    right: 0 !important;
     width: 280px;
     height: 100vh;
     background: #f4f4f4 !important;
-    transform: translateX(-100%);
+    transform: translateX(100%);
     transition: transform 0.3s ease;
     z-index: 999;
     padding-top: 80px;
@@ -321,7 +322,7 @@ tr:hover {
   }
 
   body.mobile-menu-open .sidebar {
-    transform: translateX(0);
+    transform: translateX(0) !important;
   }
 
   .mobile-menu-backdrop {
@@ -334,8 +335,8 @@ tr:hover {
   /* Vertical links */
   .nav-links {
     flex-direction: column !important;
-    gap: 20px;
-    padding: 20px 30px;
+    gap: 10px;
+    padding: 10px 20px;
   }
 
   .nav-links a,
