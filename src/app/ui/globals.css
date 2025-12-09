@@ -213,3 +213,42 @@ tr:hover {
   margin-right: 10px;
   margin-left: auto;;
 }
+
+/************** LOGIN FORM ******************/
+
+.relative {
+  display: flex;
+  gap: 20px;
+  padding: 15px;
+}
+
+.login-label{
+  font-size: 20px;
+  font-weight: 600;
+  padding-top: 20px;
+}
+.login-input{
+  padding-right: 36px;
+  height: 40px;
+  width: 50%;
+  min-width: 200px;
+  align-items: right;
+  font-size: 20px;
+
+} 
+
+.login-button{
+  /* margin-top: 20px; */
+  max-width: 150px;
+  width: 100%;
+  max-height: 100px;
+  padding: 10px;
+  margin-left: 10px;
+  background-color: #222E50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
