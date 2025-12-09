@@ -42,3 +42,33 @@ export async function deleteItem(id: number) {
         throw new Error("Failed to delete product.");
     }
 }
+
+export async function updateProductInfo(formData: FormData) {
+  const id = Number(formData.get("id"));
+  const name = formData.get("productName") as string;
+  const description = formData.get("description") as string;
+  const category_id = Number(formData.get("category"));
+  const age_group_id = Number(formData.get("age_group"));
+  const gender_id = Number(formData.get("gender"));
+
+  try {
+    await sql`
+      UPDATE products
+      SET
+        product_name = ${name},
+        description = ${description},
+        category_id = ${category_id},
+        age_group_id = ${age_group_id},
+        gender_id = ${gender_id}
+      WHERE id = ${id}
+    `;
+  } catch (error) {
+    console.error("Error updating product data:", error);
+    throw new Error("Failed to update product data.");
+  }
+}
+
+export async function saveProductUpdate(formData: FormData) {
+    await updateProductInfo(formData);
+    redirect(`/list/${formData.get("user_id")}`);
+}

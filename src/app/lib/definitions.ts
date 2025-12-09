@@ -25,6 +25,9 @@ export interface Products {
     price: number;
     product_name: string;
     description: string;
+    category_id: number;
+    age_group_id: number;
+    gender_id: number;
     image_url: string;
     user_id: string;
 };

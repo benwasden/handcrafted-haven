@@ -22,7 +22,7 @@ export default async function ItemsTable({ id }: { id: number} ) {
                             <td>{item.product_name}</td>
                             <td>${item.price}</td>
                             <td>{item.description}</td>
-                            <td><Link href={`/list/${item.user_id}/${item.id}/edit`}>Edit</Link></td>
+                            <td><Link href={`/list/${item.user_id}/edit/${item.id}`}>Edit</Link></td>
                             <td><DeleteItem id={item.id} /></td>
                         </tr>
                 ))}
