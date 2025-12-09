@@ -1,15 +1,4 @@
-/* :root {
-  --background: #ffffff;
-  --foreground: #171717;
-} */
 
-/* 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-} */
 
 html,
 body {
@@ -18,8 +7,7 @@ body {
 }
 
 body {
-  /* color: var(--foreground);
-  background: var(--background); */
+
   font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -110,12 +98,13 @@ a {
   cursor: pointer;
 }
 
-.filter-clear-button:hover {
+.filter-clear-button:hover,
+.login-button:hover {
   background: #f3f4f6;
 }
 
 .product-card:hover {
-  background-color: #1B9AAA;
+  background-color: #B5CA8D;
 
 }
 
@@ -244,8 +233,8 @@ tr:hover {
   max-height: 100px;
   padding: 10px;
   margin-left: 10px;
-  background-color: #222E50;
-  color: white;
+  background-color: #B5CA8D;
+  color: #222E50;
   border: none;
   border-radius: 5px;
   font-size: 16px;
