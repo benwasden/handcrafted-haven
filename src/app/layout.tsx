@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-// import { Geist, Geist_Mono } from "next/font/google";
 import { montserrat } from "@/app/ui/fonts";
 import "./ui/globals.css";
 import SideNav from "./ui/header/sidenav";

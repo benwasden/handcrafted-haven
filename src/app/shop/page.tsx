@@ -20,7 +20,7 @@ export default async function Shop() {
             </div>
 
             <div className="cards">
-                <div className="image">Image Placeholder</div>
+                <div className="image"></div>
             </div>
         </main>
     );

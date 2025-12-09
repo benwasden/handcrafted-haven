@@ -11,10 +11,6 @@ export default function NavLinks() {
   const userType = session?.user?.usertype;
   const userId = session?.user?.id;
 
-  // console.log("SESSION", session);
-  // console.log("USERTYPE", session?.user?.usertype);
-  // console.log("USER", session?.user?.id);
-
   const closeMenu = () => {
     document.body.classList.remove('mobile-menu-open');
   };
