@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import SignOutForm from './logout';
+import { montserrat } from '../fonts';
 
 export default function NavLinks() {
   const { data: session, status } = useSession();
@@ -35,11 +36,6 @@ export default function NavLinks() {
         <Link className="login-logout" href="/login" onClick={closeMenu}><p>Login</p></Link>
       )}
 
-      {/* Logged-in buyer */}
-      {/* {status === "authenticated" && userType === "buyer" && (
-        <Link href="/buyer-dashboard"><p>Dashboard</p></Link>
-      )}  */}
-
       {/* Logged-in seller */}
       {status === "authenticated" && userType === "seller" && (
         <Link href={`/list/${userId}`} onClick={closeMenu}><p>My Items</p></Link>
@@ -47,29 +43,10 @@ export default function NavLinks() {
 
       {status === "authenticated" && (
         <form className="login-logout" action={SignOutForm}>
-          <button >Sign Out</button>
+          <button className={montserrat.className}>Sign Out</button>
         </form>
       )}
       </div>
     </>
   );
-
-
-  // return (
-  //   <>
-  //     {links.map((link) => {
-  //       return (
-  //         <Link
-  //           key={link.name}
-  //           href={link.href}
-  //         >
-  //           <p>{link.name}</p>
-  //         </Link>
-  //       );
-  //     })}
-  //     {session?.user?.usertype === 'seller' && (
-  //       <Link href="/list"><p>Login</p></Link>
-  //     )}
-  //   </>
-  // );
 }
