@@ -19,6 +19,7 @@ export default function NavLinks() {
 
   return (
     <>
+      <div className="nav-links">
       {/* Always-visible links */}
       <Link href="/"><p>Home</p></Link>
       <Link href="/shop"><p>Store</p></Link>
@@ -26,7 +27,7 @@ export default function NavLinks() {
 
       {/* Logged-out user */}
       {status === "unauthenticated" && (
-        <Link href="/login"><p>Login</p></Link>
+        <Link className="login-logout" href="/login"><p>Login</p></Link>
       )}
 
       {/* Logged-in buyer */}
@@ -40,10 +41,11 @@ export default function NavLinks() {
       )}
 
       {status === "authenticated" && (
-        <form action={SignOutForm}>
-          <button>Sign Out</button>
+        <form className="login-logout" action={SignOutForm}>
+          <button >Sign Out</button>
         </form>
       )}
+      </div>
     </>
   );
 

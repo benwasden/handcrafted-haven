@@ -9,7 +9,7 @@ export default function SideNav() {
     <div className="sidebar">
       <Link href="/">
           <Image 
-            src="/logo.png"
+            src="/handcrafted-logo.png"
             alt="Handcrafted Haven Logo"
             width={96}
             height={96}
