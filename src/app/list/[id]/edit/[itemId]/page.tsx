@@ -1,16 +1,16 @@
 import ItemEditForm from "@/app/ui/products/editform";
 import { Suspense } from "react";
 
-export default async function EditItemPage(props: { params: Promise<{ id: number }>}) {
+export default async function EditItemPage(props: { params: Promise<{ id: number; itemId: number }>}) {
     
     const params = await props.params;
 
-    const id = params.id;
+    const itemId = params.itemId;
 
     return (
         <>
             <Suspense>
-                <ItemEditForm id={id} />
+                <ItemEditForm id={itemId} />
             </Suspense>
         </>
     )

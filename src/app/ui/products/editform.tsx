@@ -28,6 +28,9 @@ export default async function ItemEditForm({ id }: { id: number }) {
                     required
                 />
 
+                <label htmlFor="price">Price</label>
+                <input type="number" name="price" min="0.01" step="0.01" max="2000" defaultValue={itemToEdit.price} required></input>
+
                 <label htmlFor="description">Description</label>
                 <textarea
                     id="description"
@@ -74,6 +77,9 @@ export default async function ItemEditForm({ id }: { id: number }) {
                     <option value="2">Male</option>
                     <option value="3">Unisex</option>
                 </select>
+
+                <label htmlFor="image">Product Image</label>
+                <input type="file" id="image" name="image" accept="image/*" />
                 
                 <button type="submit">Edit Item</button>
             </form>

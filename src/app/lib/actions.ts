@@ -5,6 +5,8 @@ import { AuthError } from 'next-auth';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import postgres from 'postgres';
+import { put } from '@vercel/blob';
+import { NextResponse } from 'next/server';
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 
@@ -43,8 +45,9 @@ export async function deleteItem(id: number) {
     }
 }
 
-export async function updateProductInfo(formData: FormData) {
+export async function updateProductInfo(formData: FormData, imageUrl: string | null = null) {
   const id = Number(formData.get("id"));
+  const price = Number(formData.get("price"));
   const name = formData.get("productName") as string;
   const description = formData.get("description") as string;
   const category_id = Number(formData.get("category"));
@@ -55,8 +58,10 @@ export async function updateProductInfo(formData: FormData) {
     await sql`
       UPDATE products
       SET
+        price = ${price},
         product_name = ${name},
         description = ${description},
+        image_url = COALESCE(${imageUrl}, image_url),
         category_id = ${category_id},
         age_group_id = ${age_group_id},
         gender_id = ${gender_id}
@@ -69,6 +74,17 @@ export async function updateProductInfo(formData: FormData) {
 }
 
 export async function saveProductUpdate(formData: FormData) {
-    await updateProductInfo(formData);
+    const file = formData.get("image") as File | null;
+    let imageUrl = null
+
+    if (file && file.size > 0) {
+        const { url } = await put(`product-images/${file.name}`, file, {
+            access: "public",
+        });
+
+        imageUrl = url;
+    }
+
+    await updateProductInfo(formData, imageUrl);
     redirect(`/list/${formData.get("user_id")}`);
 }

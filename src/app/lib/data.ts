@@ -272,6 +272,7 @@ export async function getProductForEditById(id: number): Promise<Products[]> {
     const data = await sql<Products[]>`
     SELECT
       id,
+      price,
       product_name,
       description,
       image_url,
