@@ -4,6 +4,7 @@ import "./ui/globals.css";
 import SideNav from "./ui/header/sidenav";
 import { Providers } from "./providers";
 import { auth } from "@/auth"; //added auth helper
+import HamburgerMenu from "./ui/header/hamburger-menu";
 
 export const metadata: Metadata = {
   title: {
@@ -25,6 +26,7 @@ export default async function RootLayout({
     <html lang="en">
       <body className={`${montserrat.className}`}>
         <Providers session={session}>
+          <HamburgerMenu />
           <SideNav />
           {children} {/*moved inside Providers */}
         </Providers>
