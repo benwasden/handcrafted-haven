@@ -8,10 +8,11 @@ export default function NavLinks() {
   const { data: session, status } = useSession();
 
   const userType = session?.user?.usertype;
+  const userId = session?.user?.id;
 
-  console.log("SESSION", session);
-  console.log("USERTYPE", session?.user?.usertype);
-  console.log("USER", session?.user?.id);
+  // console.log("SESSION", session);
+  // console.log("USERTYPE", session?.user?.usertype);
+  // console.log("USER", session?.user?.id);
 
   if (status === "loading") {
     return null;
@@ -37,7 +38,7 @@ export default function NavLinks() {
 
       {/* Logged-in seller */}
       {status === "authenticated" && userType === "seller" && (
-        <Link href="/list"><p>List</p></Link>
+        <Link href={`/list/${userId}`}><p>My Items</p></Link>
       )}
 
       {status === "authenticated" && (

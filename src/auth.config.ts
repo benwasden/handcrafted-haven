@@ -20,5 +20,28 @@ export const authConfig = {
       }
       return session;
     },
+    authorized({ auth, request: { nextUrl } }) {
+      const user = auth?.user;
+      const userId = user?.id;
+
+      const pathname = nextUrl.pathname;
+
+      if (!pathname.startsWith('/list')) {
+        return true;
+      }
+    
+      if (!userId) {
+        return Response.redirect(new URL("/", nextUrl));
+      };
+    
+      const pathParts = pathname.split('/');
+      const listId = pathParts[2];
+    
+      if (!listId || listId !== userId) {
+        return Response.redirect(new URL(`/list/${userId}`, nextUrl));
+      }
+
+      return true;
+    }   
   },
 } satisfies NextAuthConfig;

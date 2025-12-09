@@ -17,7 +17,7 @@ export default function LoginForm() {
   const searchParams = useSearchParams();
   const router = useRouter();
 
-  const callbackUrl = searchParams.get('callbackUrl') || '/list';
+  const callbackUrl = searchParams.get('callbackUrl') || '/';
 
   const [errorMessage, setErrorMessage] = useState<string | undefined>();
   const [isPending, setIsPending] = useState(false);
@@ -32,7 +32,7 @@ export default function LoginForm() {
     const password = formData.get('password');
 
     const res = await signIn('credentials', {
-      redirect: false,      // we control navigation manually
+      redirect: false,
       email,
       password,
       callbackUrl,
@@ -45,9 +45,6 @@ export default function LoginForm() {
       return;
     }
 
-    // 🔥 This is what fixes your issue:
-    // 1) Navigate to your dashboard/list page
-    // 2) Force Next.js to re-fetch server components & session
     router.push(callbackUrl);
     router.refresh();
   }
@@ -75,7 +72,6 @@ export default function LoginForm() {
                 placeholder="Enter your email address"
                 required
               />
-              {/* <AtSymbolIcon className="atsymbol" /> */}
             </div>
           </div>
           <div className="login-form">
@@ -95,14 +91,12 @@ export default function LoginForm() {
                 required
                 minLength={6}
               />
-              {/* <KeyIcon className="keyicon" /> */}
             </div>
           </div>
         </div>
 
-        <Button className="login-button" aria-disabled={isPending}>
+        <Button className="mt-4 w-full" aria-disabled={isPending}>
           Log in
-          {/* <ArrowRightIcon className="arrow" /> */}
         </Button>
 
         <div
@@ -112,8 +106,8 @@ export default function LoginForm() {
         >
           {errorMessage && (
             <>
-              <ExclamationCircleIcon className="h-5 w-5 text-red-500" />
-              <p className="text-sm text-red-500">{errorMessage}</p>
+              <ExclamationCircleIcon className="error_symbol" />
+              <p className="error_message">{errorMessage}</p>
             </>
           )}
         </div>

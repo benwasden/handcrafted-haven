@@ -255,6 +255,7 @@ export async function getProductsBySellerId(id: number): Promise<Products[]> {
         product_name,
         price,
         image_url,
+        description,
         user_id
       FROM products
       WHERE user_id = ${id}
@@ -263,5 +264,27 @@ export async function getProductsBySellerId(id: number): Promise<Products[]> {
   } catch (error) {
     console.error("Error fetching product data:", error);
     throw new Error("Failed to fetch product data");
+  }
+}
+
+export async function getProductForEditById(id: number): Promise<Products[]> {
+  try {
+    const data = await sql<Products[]>`
+    SELECT
+      id,
+      price,
+      product_name,
+      description,
+      image_url,
+      category_id,
+      age_group_id,
+      gender_id
+    FROM products
+    WHERE id = ${id}
+      `;
+      return data ?? null;
+  } catch (error) {
+    console.error("Error fetching product data:", error);
+    throw new Error("Failed to fetch product data.");
   }
 }

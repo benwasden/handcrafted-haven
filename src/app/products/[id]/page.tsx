@@ -67,10 +67,12 @@ export default async function ProductPage({ params }: ProductPageProps) {
     <main className={styles.pageContainer}>
       <h1 className={styles.title}>{product.Product_Name}</h1>
 
+
       <div className={styles.productContainer}>
         <div className={styles.productImage}>
-          <img src={`../${product.Image_URL}`} alt={product.Product_Name} />
+          <img src={`${product.Image_URL}`} alt={product.Product_Name} />
         </div>
+
 
         <div className={styles.productDetails}>
           <p className={styles.description}>{product.Description}</p>
