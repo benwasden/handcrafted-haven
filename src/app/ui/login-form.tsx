@@ -44,15 +44,13 @@ export default function LoginForm() {
   }
 
   return (
-    <>
-    <div className="loginFormWrapper">
     <form onSubmit={handleSubmit} className="login-form">
       <div>
         <h1 className={`${funnel.className}`}>
           Please log in to continue.
         </h1>
         <div className="w-full">
-          <div className="login-form-email">
+          <div className="login-form">
             <label
               className="login-label"
               htmlFor="email"
@@ -70,7 +68,7 @@ export default function LoginForm() {
               />
             </div>
           </div>
-          <div className="login-form-pwd">
+          <div className="login-form">
             <label
               className="login-label"
               htmlFor="password"
@@ -109,7 +107,5 @@ export default function LoginForm() {
         </div>
       </div>
     </form>
-    </div>
-    </>
   );
 }
