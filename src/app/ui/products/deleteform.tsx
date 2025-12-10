@@ -5,7 +5,6 @@ import { deleteItem } from "@/app/lib/actions";
 import { funnel } from "@/app/ui/fonts";
 import Link from "next/link";
 import styles from "@/app/ui/list.module.css";
-import { redirect } from "next/dist/server/api-utils";
 
 export default async function ItemDeleteForm({ id }: { id: number }) {
 
