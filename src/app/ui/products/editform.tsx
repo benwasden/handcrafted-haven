@@ -4,6 +4,7 @@ import { getProductForEditById } from "@/app/lib/data";
 import { saveProductUpdate } from "@/app/lib/actions";
 import { funnel } from "@/app/ui/fonts";
 import Link from "next/link";
+import styles from "@/app/ui/list.module.css";
 
 export default async function ItemEditForm({ id }: { id: number }) {
 
@@ -15,8 +16,8 @@ export default async function ItemEditForm({ id }: { id: number }) {
 
     return (
         <>
-            <Link href={`/list/${itemToEdit.user_id}`} id="go_back" className={funnel.className}>Go Back</Link>
-            <form action={saveProductUpdate} className="productForm">
+            <div className={styles.goBackWrapper}><Link href={`/list/${itemToEdit.user_id}`} id={styles.goBack} className={funnel.className}>Go Back</Link></div>
+            <form action={saveProductUpdate} className={styles.productForm}>
                 <fieldset>
                     <legend className={funnel.className}>Edit {itemToEdit.product_name}</legend>
                     <input type="hidden" name="id" value={itemToEdit.id} />
@@ -39,6 +40,7 @@ export default async function ItemEditForm({ id }: { id: number }) {
                         id="description"
                         name="description"
                         defaultValue={itemToEdit.description}
+                        maxLength={500}
                         required
                     />
 
@@ -86,7 +88,7 @@ export default async function ItemEditForm({ id }: { id: number }) {
 
                 </fieldset>
                 
-                <button type="submit" className={funnel.className}>Edit Item</button>
+                <button type="submit" className={funnel.className} id={styles.submitButton}>Edit Item</button>
             </form>
         </>
     )

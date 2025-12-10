@@ -107,8 +107,8 @@ a {
 }
 
 .filter-clear-button:hover,
-.login-button:hover {
-  background: #f3f4f6;
+#login-button:hover {
+  background: var(--secondary-hover);
 }
 
 .product-card:hover {
@@ -134,6 +134,19 @@ a {
   flex-direction: column;
   gap: 0.5rem;
   transition: background-color 0.25s ease-in-out;
+}
+
+#shop-header {
+  text-align: center;
+  font-size: 50px;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+.shop-page {
+  margin: 0 auto;
+  max-width: 1200px;
+  width: 100%;
+  margin-bottom: 20px;
 }
 
 .product-image {
@@ -205,6 +218,20 @@ tbody tr:nth-child(odd):hover {
 
 /************** LOGIN FORM ******************/
 
+.login-form {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  border: solid 1px black;
+  text-align: center;
+  margin-top: 20px;
+  border-radius: 15px;
+  padding: 10px;
+}
+.login-form input {
+  width: 100%;
+}
+
 .relative {
   display: flex;
   gap: 20px;
@@ -233,13 +260,15 @@ tbody tr:nth-child(odd):hover {
   max-height: 100px;
   padding: 10px;
   margin-left: 10px;
-  background-color: #B5CA8D;
+  background-color: var(--secondary-color);
   color: #222E50;
   border: none;
   border-radius: 5px;
   font-size: 16px;
   cursor: pointer;
+  transition: background-color 0.25s ease-in-out;
 }
+
 .error_symbol {
   max-width: 20px;
 }
@@ -248,19 +277,6 @@ tbody tr:nth-child(odd):hover {
   align-items: flex-end;
   gap: 0.25rem;
   color: rgb(182, 4, 4);
-}
-
-/************** ADD/EDIT FORMs ******************/
-
-.productForm {
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.productForm input, .productForm textarea, .productForm select {
-  width: 100%;
-  margin-bottom: 25px;
 }
 
 /************** NAVIGATION ******************/

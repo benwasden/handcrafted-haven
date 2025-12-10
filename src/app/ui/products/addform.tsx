@@ -3,13 +3,14 @@
 import { saveProduct } from "@/app/lib/actions";
 import { funnel } from "@/app/ui/fonts";
 import Link from "next/link";
+import styles from "@/app/ui/list.module.css";
 
 export default async function ItemAddForm({ id }: { id: number }) {
 
     return (
         <>
-            <Link href={`/list/${id}`} id="go_back" className={funnel.className}>Go Back</Link>
-            <form action={saveProduct} className="productForm">
+            <div className={styles.goBackWrapper}><Link href={`/list/${id}`} id={styles.goBack} className={funnel.className}>Go Back</Link></div>
+            <form action={saveProduct} className={styles.productForm}>
                 <fieldset>
                     <legend className={funnel.className}>Add New Product</legend>
                     <input type="hidden" name="user_id" value={id} />
@@ -73,7 +74,7 @@ export default async function ItemAddForm({ id }: { id: number }) {
 
                 </fieldset>
                 
-                <button type="submit" className={funnel.className}>Add Item</button>
+                <button type="submit" className={funnel.className} id={styles.submitButton}>Add Item</button>
             </form>
         </>
     )

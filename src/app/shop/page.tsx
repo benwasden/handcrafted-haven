@@ -10,17 +10,19 @@ export const metadata = {
 export default async function Shop() {
     return (
         <main>
-            <h1 className={`${funnel.className} text-3xl font-bold mb-6`}>Shop</h1>
+            <div className="shop-page">
+                <h1 className={`${funnel.className}`} id="shop-header">Shop</h1>
 
-            <div className="product-grid">
-                <Suspense fallback={<CardsSkeleton />}>
-                    {/* Async server component */}
-                    <CardWrapper />
-                </Suspense>
-            </div>
+                <div className="product-grid">
+                    <Suspense fallback={<CardsSkeleton />}>
+                        {/* Async server component */}
+                        <CardWrapper />
+                    </Suspense>
+                </div>
 
-            <div className="cards">
-                <div className="image"></div>
+                <div className="cards">
+                    <div className="image"></div>
+                </div>
             </div>
         </main>
     );
