@@ -1,11 +1,9 @@
 import type { NextAuthConfig } from "next-auth";
 
 export const authConfig = {
-  providers: [],
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-       
         token.usertype = (user as any).usertype;
         token.id = user.id;
       }
@@ -20,19 +18,18 @@ export const authConfig = {
       }
       return session;
     },
+
     authorized({ auth, request: { nextUrl } }) {
       const user = auth?.user;
       const userId = user?.id;
 
       const pathname = nextUrl.pathname;
 
-      if (!pathname.startsWith('/list')) {
-        return true;
-      }
-    
+      if (!pathname.startsWith('/list')) return true;
+
       if (!userId) {
         return Response.redirect(new URL("/", nextUrl));
-      };
+      }
     
       const pathParts = pathname.split('/');
       const listId = pathParts[2];
@@ -44,4 +41,4 @@ export const authConfig = {
       return true;
     }   
   },
-} satisfies NextAuthConfig;
+} satisfies Partial<NextAuthConfig>;   // <-- FIXED
