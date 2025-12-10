@@ -10,7 +10,7 @@ export default async function ItemCards({ id }: { id: number} ) {
             <section className="product-grid">
             {items?.map((item) => (
                 
-                <div className="product-card">
+                <div className="product-card" key={item.id}>
                     <img className="product-image" src={item.image_url} />
                     <h2 className="product-name">{item.product_name}</h2>
                     <p className="price">${item.price}</p>

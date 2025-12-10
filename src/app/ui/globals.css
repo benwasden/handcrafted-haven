@@ -14,12 +14,12 @@ body {
 }
 
 :root {
-  --primary-color: #1B9AAA;
+  --primary-color: #d4f4f9;
+  --primary-hover: #baebf3;
   --secondary-color: #B5CA8D;
+  --secondary-hover: #c0d991;
   --tertiary-color: #222E50;
 
-  /* --heading-font: "Funnel Display", sans-serif;
-  --paragraph-font: "Montserrat", sans-serif; */
 }
 
 * {
@@ -103,6 +103,7 @@ a {
   border: 1px solid #d1d5db;
   background: #B5CA8D;
   cursor: pointer;
+  transition: background-color 0.25s ease-in-out;
 }
 
 .filter-clear-button:hover,
@@ -132,6 +133,7 @@ a {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  transition: background-color 0.25s ease-in-out;
 }
 
 .product-image {
@@ -164,18 +166,26 @@ a {
 
 table {
   border: solid 1px black;
+  border-collapse: collapse;
 }
 
-th {
-  background-color: none;
+td {
+  padding: 5px;
+}
+tr {
+  transition: background-color 0.25s ease-in-out;
 }
 
-tr:nth-child(odd) {
-  background-color: #f2f2f2;
+tbody tr:nth-child(odd) {
+  background-color: var(--primary-color);
 }
 
-tr:hover {
-  background-color: #ddd;
+tbody tr:nth-child(even):hover {
+  background-color: var(--secondary-hover);
+}
+
+tbody tr:nth-child(odd):hover {
+  background-color: var(--primary-hover);
 }
 
 .product-name,
@@ -263,8 +273,16 @@ tr:hover {
   display: flex;
   gap: 20px;
   width: 100%;
-  background-color: #f4f4f4;
+  background-color: var(--secondary-color);
   padding: 15px;
+}
+.nav-links p, .login-logout {
+  padding: 5px;
+  transition: background-color 0.25s ease-in-out;
+}
+.nav-links p:hover, .login-logout:hover {
+  background-color: var(--secondary-hover);
+  border-radius: 5px;
 }
 
 .login-logout {
@@ -272,6 +290,15 @@ tr:hover {
   margin-left: auto;
   ;
 }
+ .login-logout button {
+    background: none !important;
+    border: none !important;
+    color: #222E50 !important;
+    font-size: 1.2rem !important;
+    cursor: pointer;
+    width: 100% !important;
+    text-align: left !important;
+  }
 
 /* MOBILE MENU  */
 @media (max-width: 550px) {
@@ -382,7 +409,7 @@ tr:hover {
    text-align: left !important;
  }
 
- .login-logout button {
+ /* .login-logout button {
     background: none !important;
     border: none !important;
     color: #222E50 !important;
@@ -390,7 +417,7 @@ tr:hover {
     cursor: pointer;
     width: 100% !important;
     text-align: left !important;
-  }
+  } */
 
 }
 

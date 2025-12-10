@@ -5,6 +5,7 @@ export type User = {
     password: string;
     friendly_name: string;
     usertype: string;
+    description: string;
 };
 
 export interface Product {

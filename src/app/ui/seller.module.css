@@ -1,0 +1,36 @@
+.sellersTable {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1000px;
+    margin-top: 50px;
+    border-radius: 10px;
+}
+
+#tableHead {
+    font-size: 30px;
+    background-color: none;
+}
+.sellerProfile {
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    text-align: center;
+    background-color: var(--primary-color);
+    border: solid 2px black;
+    padding: 10px;
+    border-radius: 15px;
+}
+
+
+.sellerProfile h1 {
+    margin: 30px;
+    font-size:50px;
+}
+
+.sellerProfile h2 {
+    margin: 30px;
+    margin-top: 60px;
+    border-top: solid 1px black;
+    padding: 8px;
+}

@@ -232,7 +232,8 @@ export async function getSellerById(id: number): Promise<User[]> {
     const data = await sql<User[]>`
       SELECT
         id,
-        friendly_name
+        friendly_name,
+        description
       FROM users
       WHERE id = ${id}
       ORDER BY display_name
