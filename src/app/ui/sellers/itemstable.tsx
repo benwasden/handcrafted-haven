@@ -1,6 +1,6 @@
 import { getProductsBySellerId } from "@/app/lib/data";
 import { Products } from "@/app/lib/definitions";
-import { DeleteItem } from "./buttons";
+
 import styles from "@/app/ui/list.module.css";
 
 import Link from "next/link";
@@ -24,7 +24,7 @@ export default async function ItemsTable({ id }: { id: number} ) {
                             <td>${item.price}</td>
                             <td className={styles.description}>{item.description}</td>
                             <td><Link href={`/list/${item.user_id}/edit/${item.id}`}>Edit</Link></td>
-                            <td><DeleteItem id={item.id} /></td>
+                            <td><Link href={`/list/${item.user_id}/delete/${item.id}`}>Delete</Link></td>
                         </tr>
                 ))}
             </tbody>
