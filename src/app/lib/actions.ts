@@ -36,17 +36,18 @@ export async function authenticate(
 
 export async function deleteItem(formData: FormData) {
   const id = Number(formData.get("id"));
+
     try {
         await sql`DELETE FROM products WHERE id = ${id}`;
     } catch (error) {
         console.error("Error deleting product:", error);
         throw new Error("Failed to delete product.");
     }
+    redirect(`/`);
 }
 
 export async function deleteItemInfo(formData: FormData) {
   await deleteItem(formData);
-  redirect(`/list/${formData.get("user_id")}`);
 }
 
 export async function updateProductInfo(formData: FormData, imageUrl: string | null = null) {
