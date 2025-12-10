@@ -1,15 +1,9 @@
 'use client';
  
 import { funnel, montserrat } from '@/app/ui/fonts';
-import {
-  AtSymbolIcon,
-  KeyIcon,
-  ExclamationCircleIcon,
-} from '@heroicons/react/24/outline';
-import { ArrowRightIcon } from '@heroicons/react/20/solid';
+import {ExclamationCircleIcon} from '@heroicons/react/24/outline';
 import { Button } from '@/app/ui/button';
 import { useState, FormEvent } from 'react';
-import { authenticate } from '../lib/actions';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { signIn } from 'next-auth/react';
  

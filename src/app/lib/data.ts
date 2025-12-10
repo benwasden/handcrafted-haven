@@ -22,11 +22,9 @@ export async function fetchCatalog(): Promise<Product[]> {
       FROM products
       ORDER BY product_name
     `;
-
-    // console.log('Catalog data fetched:', data);
     return data;
   } catch (error) {
-    // console.error('Error fetching catalog data:', error);
+    console.error('Error fetching catalog data:', error);
     throw new Error('Failed to fetch catalog data');
   }
 }
@@ -45,7 +43,7 @@ export async function fetchCategories(): Promise<Category[]> {
     // console.log('Categories data fetched:', data);
     return data;
   } catch (error) {
-    // console.error('Error fetching categories data:', error);
+    console.error('Error fetching categories data:', error);
     throw new Error('Failed to fetch categories data');
   }
 }
@@ -61,10 +59,9 @@ export async function fetchGenders(): Promise<Gender[]> {
       FROM gender
       ORDER BY gender
         `;
-    // console.log('Gender data fetched:', data);
     return data;
   } catch (error) {
-    // console.error('Error fetching gender data:', error);
+    console.error('Error fetching gender data:', error);
     throw new Error('Failed to fetch gender data');
   }
 }
@@ -80,10 +77,9 @@ export async function fetchAgeGroups(): Promise<Age_Groups[]> {
       FROM age_groups
       ORDER BY age_range
         `;
-    // console.log('Age groups data fetched:', data);
     return data;
   } catch (error) {
-    // console.error('Error fetching age groups data:', error);
+    console.error('Error fetching age groups data:', error);
     throw new Error('Failed to fetch age groups data');
   }
 }
@@ -101,10 +97,9 @@ export async function fetchSellers(): Promise<User[]> {
       WHERE usertype = 'seller'
       ORDER BY display_name
         `;
-    // console.log('Sellers data fetched:', data);
     return data;
   } catch (error) {
-    // console.error('Error fetching sellers data:', error);
+    console.error('Error fetching sellers data:', error);
     throw new Error('Failed to fetch sellers data');
   }
 }
@@ -123,10 +118,9 @@ export async function fetchSellersInfo(): Promise<User[]> {
       WHERE usertype = 'seller'
       ORDER BY display_name
         `;
-    // console.log('Sellers data fetched:', data);
     return data;
   } catch (error) {
-    // console.error('Error fetching sellers data:', error);
+    console.error('Error fetching sellers data:', error);
     throw new Error('Failed to fetch sellers data');
   }
 }
@@ -241,7 +235,7 @@ export async function getSellerById(id: number): Promise<User[]> {
     // console.log('Sellers data fetched:', data);
     return data;
   } catch (error) {
-    // console.error('Error fetching sellers data:', error);
+    console.error('Error fetching sellers data:', error);
     throw new Error('Failed to fetch sellers data');
   }
 }

@@ -16,7 +16,7 @@ export default async function ListPage(props: { params: Promise<{ id: number }>}
     return (
         <>
             <Link href={`/list/${id}/add`} className="addItem">Add Item</Link>
-            <h1>{seller.friendly_name}'s Products:</h1>
+            <h1>{seller.friendly_name} Products:</h1>
             <Suspense key={seller.friendly_name + id}>
                 <ItemsTable id={id} />
             </Suspense>
