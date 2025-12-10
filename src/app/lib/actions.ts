@@ -34,14 +34,20 @@ export async function authenticate(
     }
 }
 
-export async function deleteItem(id: number) {
+export async function deleteItem(formData: FormData) {
+  const id = Number(formData.get("id"));
+
     try {
         await sql`DELETE FROM products WHERE id = ${id}`;
-        revalidatePath('/list');
     } catch (error) {
         console.error("Error deleting product:", error);
         throw new Error("Failed to delete product.");
     }
+    redirect(`/`);
+}
+
+export async function deleteItemInfo(formData: FormData) {
+  await deleteItem(formData);
 }
 
 export async function updateProductInfo(formData: FormData, imageUrl: string | null = null) {

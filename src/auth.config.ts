@@ -41,6 +41,10 @@ export const authConfig = {
         return Response.redirect(new URL(`/list/${userId}`, nextUrl));
       }
 
+      if(listId == null) {
+        return Response.redirect(new URL(`/list/${userId}`, nextUrl));
+      } 
+
       return true;
     }   
   },
