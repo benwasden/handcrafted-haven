@@ -1,20 +1,14 @@
 import { Suspense } from "react"
 import { SellersSkeleton } from "@/app/ui/skeletons"
 import { Metadata } from "next"
-import Search from "@/app/ui/search";
-// import SellerWrapper from "@/app/ui/sellers/sellers";
 import SellersTable from "@/app/ui/sellers/table";
 
+
 export const metadata: Metadata = {
-    title: 'Sellers',
+    title: 'Sellers Table',
 };
 
-export default async function Page(props: {
-    searchParams?: Promise<{
-        query?: string;
-    }>;
-}) {
-    const searchParams = await props.searchParams;
+export default async function Page() {
 
     return (
         <div className="w-full">

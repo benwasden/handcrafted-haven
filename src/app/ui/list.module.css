@@ -1,0 +1,66 @@
+.addItem, #goBack {
+    border: solid 1px black;
+    padding: 5px;
+    border-radius: 8px;
+    background-color: var(--secondary-color);
+    transition: background-color 0.25s ease-in-out;
+}
+
+.addItem:hover, #goBack:hover {
+    background-color: var(--secondary-hover);
+}
+
+.buttonWrapper {
+    margin: 10px;
+}
+
+.itemsTable {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1000px;
+    margin-top: 50px;
+}
+
+.description {
+    font-size: 15px;
+    font-style: italic;
+}
+
+.productForm {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.productForm fieldset {
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 25px;
+}
+
+.productForm input, .productForm textarea, .productForm select {
+  width: 100%;
+  margin-bottom: 25px;
+  font-size: 18px;
+}
+
+.productForm textarea {
+    height: 200px;
+}
+.goBackWrapper {
+    margin: 20px;
+}
+
+#submitButton {
+    width: 100%;
+    padding: 10px;
+    font-size: 20px;
+    margin-top: 10px;
+    border-radius: 10px;
+    background-color: var(--primary-color);
+    transition: background-color 0.25s ease-in-out;
+}
+
+#submitButton:hover {
+    background-color: var(--primary-hover);
+}

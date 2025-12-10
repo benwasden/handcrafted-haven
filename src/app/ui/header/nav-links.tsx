@@ -29,7 +29,10 @@ export default function NavLinks() {
 
       {/* Logged-out user */}
       {status === "unauthenticated" && (
-        <Link className="login-logout" href="/login" onClick={closeMenu}><p>Login</p></Link>
+        // <Link className="login-logout" href="/login" onClick={closeMenu}><p>Login</p></Link>
+        <form className="login-logout" action="/login" onClick={closeMenu}>
+          <button className={montserrat.className}>Login</button>
+        </form>
       )}
 
       {/* Logged-in seller */}

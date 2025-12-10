@@ -14,12 +14,12 @@ body {
 }
 
 :root {
-  --primary-color: #1B9AAA;
+  --primary-color: #d4f4f9;
+  --primary-hover: #baebf3;
   --secondary-color: #B5CA8D;
+  --secondary-hover: #c0d991;
   --tertiary-color: #222E50;
 
-  /* --heading-font: "Funnel Display", sans-serif;
-  --paragraph-font: "Montserrat", sans-serif; */
 }
 
 * {
@@ -103,11 +103,12 @@ a {
   border: 1px solid #d1d5db;
   background: #B5CA8D;
   cursor: pointer;
+  transition: background-color 0.25s ease-in-out;
 }
 
 .filter-clear-button:hover,
-.login-button:hover {
-  background: #f3f4f6;
+#login-button:hover {
+  background: var(--secondary-hover);
 }
 
 .product-card:hover {
@@ -132,6 +133,20 @@ a {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  transition: background-color 0.25s ease-in-out;
+}
+
+#shop-header {
+  text-align: center;
+  font-size: 50px;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+.shop-page {
+  margin: 0 auto;
+  max-width: 1200px;
+  width: 100%;
+  margin-bottom: 20px;
 }
 
 .product-image {
@@ -164,18 +179,26 @@ a {
 
 table {
   border: solid 1px black;
+  border-collapse: collapse;
 }
 
-th {
-  background-color: none;
+td {
+  padding: 5px;
+}
+tr {
+  transition: background-color 0.25s ease-in-out;
 }
 
-tr:nth-child(odd) {
-  background-color: #f2f2f2;
+tbody tr:nth-child(odd) {
+  background-color: var(--primary-color);
 }
 
-tr:hover {
-  background-color: #ddd;
+tbody tr:nth-child(even):hover {
+  background-color: var(--secondary-hover);
+}
+
+tbody tr:nth-child(odd):hover {
+  background-color: var(--primary-hover);
 }
 
 .product-name,
@@ -194,6 +217,20 @@ tr:hover {
 
 
 /************** LOGIN FORM ******************/
+
+.login-form {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  border: solid 1px black;
+  text-align: center;
+  margin-top: 20px;
+  border-radius: 15px;
+  padding: 10px;
+}
+.login-form input {
+  width: 100%;
+}
 
 .relative {
   display: flex;
@@ -223,13 +260,15 @@ tr:hover {
   max-height: 100px;
   padding: 10px;
   margin-left: 10px;
-  background-color: #B5CA8D;
+  background-color: var(--secondary-color);
   color: #222E50;
   border: none;
   border-radius: 5px;
   font-size: 16px;
   cursor: pointer;
+  transition: background-color 0.25s ease-in-out;
 }
+
 .error_symbol {
   max-width: 20px;
 }
@@ -238,19 +277,6 @@ tr:hover {
   align-items: flex-end;
   gap: 0.25rem;
   color: rgb(182, 4, 4);
-}
-
-/************** ADD/EDIT FORMs ******************/
-
-.productForm {
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.productForm input, .productForm textarea, .productForm select {
-  width: 100%;
-  margin-bottom: 25px;
 }
 
 /************** NAVIGATION ******************/
@@ -263,8 +289,16 @@ tr:hover {
   display: flex;
   gap: 20px;
   width: 100%;
-  background-color: #f4f4f4;
+  background-color: var(--secondary-color);
   padding: 15px;
+}
+.nav-links p, .login-logout {
+  padding: 5px;
+  transition: background-color 0.25s ease-in-out;
+}
+.nav-links p:hover, .login-logout:hover {
+  background-color: var(--secondary-hover);
+  border-radius: 5px;
 }
 
 .login-logout {
@@ -272,6 +306,15 @@ tr:hover {
   margin-left: auto;
   ;
 }
+ .login-logout button {
+    background: none !important;
+    border: none !important;
+    color: #222E50 !important;
+    font-size: 1.2rem !important;
+    cursor: pointer;
+    width: 100% !important;
+    text-align: left !important;
+  }
 
 /* MOBILE MENU  */
 @media (max-width: 550px) {
@@ -382,7 +425,7 @@ tr:hover {
    text-align: left !important;
  }
 
- .login-logout button {
+ /* .login-logout button {
     background: none !important;
     border: none !important;
     color: #222E50 !important;
@@ -390,7 +433,7 @@ tr:hover {
     cursor: pointer;
     width: 100% !important;
     text-align: left !important;
-  }
+  } */
 
 }
 

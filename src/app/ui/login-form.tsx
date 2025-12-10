@@ -1,15 +1,9 @@
 'use client';
  
 import { funnel, montserrat } from '@/app/ui/fonts';
-import {
-  AtSymbolIcon,
-  KeyIcon,
-  ExclamationCircleIcon,
-} from '@heroicons/react/24/outline';
-import { ArrowRightIcon } from '@heroicons/react/20/solid';
+import {ExclamationCircleIcon} from '@heroicons/react/24/outline';
 import { Button } from '@/app/ui/button';
 import { useState, FormEvent } from 'react';
-import { authenticate } from '../lib/actions';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { signIn } from 'next-auth/react';
  
@@ -50,13 +44,15 @@ export default function LoginForm() {
   }
 
   return (
+    <>
+    <div className="loginFormWrapper">
     <form onSubmit={handleSubmit} className="login-form">
       <div>
         <h1 className={`${funnel.className}`}>
           Please log in to continue.
         </h1>
         <div className="w-full">
-          <div className="login-form">
+          <div className="login-form-email">
             <label
               className="login-label"
               htmlFor="email"
@@ -74,7 +70,7 @@ export default function LoginForm() {
               />
             </div>
           </div>
-          <div className="login-form">
+          <div className="login-form-pwd">
             <label
               className="login-label"
               htmlFor="password"
@@ -113,5 +109,7 @@ export default function LoginForm() {
         </div>
       </div>
     </form>
+    </div>
+    </>
   );
 }
